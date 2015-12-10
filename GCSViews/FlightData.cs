@@ -3796,5 +3796,25 @@ namespace MissionPlanner.GCSViews
             frm.TopMost = true;
             frm.Show();
         }
+
+        private void BUT_chute_Click(object sender, EventArgs e)
+        {
+            if (MainV2.comPort.BaseStream.IsOpen)
+            {
+                try
+                {
+                   if (CustomMessageBox.Show("Are you sure you want to launch parachute?", "Launch Parachute?", MessageBoxButtons.YesNo) ==
+                            DialogResult.No)
+                            return;
+
+                    MainV2.comPort.setParam(new string[] { "AFS_TERMINATE" }, 1.0);
+                }
+                catch
+                {
+                    CustomMessageBox.Show(Strings.ErrorNoResponce, Strings.ERROR);
+                }
+                
+            }
+        }
     }
 }
